@@ -1,0 +1,12 @@
+{% extends "layout/base.html" %}
+{% block head %}
+	<head>
+		{% if title %}
+		<title>{{ title }}</title>
+		{% else %}
+		<title>VSH-VOR18</title>
+		{% endif %}
+		{% block meta %}{% endblock meta %}
+		{% block styles %}{% endblock styles %}
+	</head>
+{% endblock head %}

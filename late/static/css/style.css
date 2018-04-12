@@ -1,0 +1,20 @@
+.body-grid {
+	display: grid;
+	grid-template:
+	[header-start] 	"header" 	auto 	[header-end]
+	[main-start] 		"main" 		1fr 	[main-end]
+	[footer-start] 	"footer" 	auto	[footer-end]
+	/ 1fr;
+}
+
+.header-grid-item {
+	grid-area: header;
+}
+
+.main-grid-item {
+	grid-area: main;
+}
+
+.footer-grid-item {
+	grid-area: footer;
+}
