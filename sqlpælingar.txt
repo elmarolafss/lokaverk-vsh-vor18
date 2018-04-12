@@ -1,0 +1,26 @@
+Users:
+userId - int primary key incrementing not null
+userName - varchar(255)
+userEmail - varchar(255)
+password - varchar(100)(Hashed-MD5 or SHA1)
+date - DATE
+
+Product:
+name - varchar(255) prim key
+displayName - varchar(255)
+type - varchar(255)
+price - float
+discount - float
+color - varchar(255)
+sizes - varchar(255)
+info - varchar(255)
+
+Purchase:
+id - int primary key incrementing not null
+userId - int foreign key(Users)
+totalPreTax - float
+tax - float
+discount - float
+total - float
+date - DATE
+
