@@ -1,4 +1,5 @@
 from late import db
+from datetime import datetime
 
 class User(db.Model):
 	id = db.Column(db.Integer, primary_key=True)
@@ -11,16 +12,16 @@ class User(db.Model):
 		return f"<User: {self.username}>"
 
 class Product(db.Model):
-	link_name = db.Column(db.string(255), primary_key=True)
-	name = db.Column(db.string(255), index=True, unique=True)
+	link_name = db.Column(db.String(255), primary_key=True)
+	name = db.Column(db.String(255), index=True, unique=True)
 	price = db.Column(db.Float, index=True)
 	discount = db.Column(db.Float)
-	category = db.Column(db.string(255), index=True)
-	color = db.Column(db.string(255), index=True)
-	colors = db.Column(db.string(255), index=True)
-	images = db.Column(db.string(255), index=True)
-	info = db.Column(db.string(255), index=True)
-	sizes = db.Column(db.string(255))
+	category = db.Column(db.String(255), index=True)
+	color = db.Column(db.String(255), index=True)
+	colors = db.Column(db.String(255), index=True)
+	images = db.Column(db.String(255), index=True)
+	info = db.Column(db.String(255), index=True)
+	sizes = db.Column(db.String(255))
 
 	def colors_object(self):
 		return Color(self.colors)
@@ -36,12 +37,12 @@ class Product(db.Model):
 
 class Purchase(db.Model):
 	id = db.Column(db.Integer, primary_key=True)
-	prod_name = db.Column(db.string(255), db.ForeignKey('product.link_name'))
+	prod_name = db.Column(db.String(255), db.ForeignKey('product.link_name'))
 	cart_id = db.Column(db.Integer, db.ForeignKey('cart.id'))
 	price = db.Column(db.Float, index=True)
 	discount = db.Column(db.Float, index=True)
-	color = db.Column(db.string(255), index=True)
-	size = db.Column(db.string(255), index=True)
+	color = db.Column(db.String(255), index=True)
+	size = db.Column(db.String(255), index=True)
 	date = db.Column(db.DateTime, index=True, default=datetime.utcnow)
 
 	def __repr__(self):
@@ -54,7 +55,7 @@ class Cart(db.Model):
 	discount = db.Column(db.Float, index=True)
 	tax = db.Column(db.Float, index=True)
 	total = db.Column(db.Float, index=True)
-	color = db.Column(db.string(255), index=True)
+	color = db.Column(db.String(255), index=True)
 
 	def __repr__(self):
 		return self.id
