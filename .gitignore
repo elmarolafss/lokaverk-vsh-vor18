@@ -55,3 +55,6 @@ ENV/
 
 # mkdocs documentation
 /site
+
+# .tmp files
+*.tmp
