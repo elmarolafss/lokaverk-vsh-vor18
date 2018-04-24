@@ -126,6 +126,25 @@ h1, h2, h3, p {
 	padding: 0 1em 0 1em;
 }
 
+.search-bar {
+	padding-right: 3em;
+	width: 35em;
+	transition: 0 all;
+}
+.search-bar input {
+	border: none;
+	box-sizing: border-box;
+	transition: .5s width ease;
+}
+.search-bar-hidden {
+	width: 0;
+	transition: 0 all;
+}
+.search-bar-hidden input {
+	padding: 0;
+	width: 0;
+}
+
 .search-icon {
 	fill: var(--white);
 }
@@ -176,4 +195,13 @@ h1, h2, h3, p {
 .btn-child {
 	display: table-cell;
 	vertical-align: middle;
+}
+
+/* MEDIA */
+@media screen and (max-width: 60em) {
+	:root {
+		--master-size: 14px;
+	}
+	.search-bar {
+		padding-right: 6em;
 }

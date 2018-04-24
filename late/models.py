@@ -1,6 +1,8 @@
 from late import db
 from datetime import datetime
 
+categories = ["dresses", "jackets", "tops", "jeans", "pants"]
+
 class User(db.Model):
 	id = db.Column(db.Integer, primary_key=True)
 	username = db.Column(db.String(64), index=True, unique=True)

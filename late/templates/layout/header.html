@@ -2,36 +2,22 @@
 {% block header %}
 		<header class="header-grid-item bg-black" role="header">
 			<div class="header-nav h-100 center flex justify-between items-center">
-				<a href="/" class="db link subheadline white hover-red">late</a>
+				<a href="/" class="db link white hover-red">
+					<div class="subheadline pt1">late</div>
+				</a>
 				<div class="flex justify-end">
-					<div class="flex justify-between pv2">
-						<a href="#" class="link btn-white mr3">
-							<div class="btn-child ui">
-								dresses
-							</div>
-						</a>
-						<a href="#" class="link btn-white mr3">
-							<div class="btn-child ui">
-								jackets
-							</div>
-						</a>
-						<a href="#" class="link btn-white mr3">
-							<div class="btn-child ui">
-								tops
-							</div>
-						</a>
-						<a href="#" class="link btn-white mr3">
-							<div class="btn-child ui">
-								jeans
-							</div>
-						</a>
-						<a href="#" class="link btn-white mr3">
-							<div class="btn-child ui">
-								pants
-							</div>
-						</a>
+					<div class="dn flex-l justify-between pv2">
+						{% for category in categories %}
+							<a href="/search?cat={{ category }}" class="link btn-white mr3">
+								<div class="btn-child ui">
+									{{ category }}
+								</div>
+							</a>
+    				{% endfor %}
 					</div>
-					<svg class="pv2 h2 w2 pointer dib search-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M22.89,20.63a12.79,12.79,0,1,0-2.26,2.26L29.74,32,32,29.74ZM6,19.57a9.59,9.59,0,1,1,14.6-1.23,9.49,9.49,0,0,1-2.26,2.26A9.6,9.6,0,0,1,6,19.57Z"/></svg>
+					<form id="srch-bar" class="search-bar-hidden search-bar absolute pt2-ns" action="/search"><input class="h2 w-100 ui ph2" type="text" name="term"></form>
+					<svg id="srch-btn" class="z-max pv2 h2 w2 pointer dib search-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M22.89,20.63a12.79,12.79,0,1,0-2.26,2.26L29.74,32,32,29.74ZM6,19.57a9.59,9.59,0,1,1,14.6-1.23,9.49,9.49,0,0,1-2.26,2.26A9.6,9.6,0,0,1,6,19.57Z"/></svg>
+					<svg class="dn-l ml3 pv2 h2 w2 pointer dib search-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><rect width="32" height="4"/><rect y="14" width="32" height="4"/><rect y="28" width="32" height="4"/></svg>
 				</div>
 			</div>
 		</header>
