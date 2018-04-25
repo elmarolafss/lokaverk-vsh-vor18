@@ -84,14 +84,14 @@ h1, h2, h3, p {
 
 .body-text, p, div {
 	font-family: Montserrat;
-	font-weight: bold;
+	font-weight: normal;
 	font-size: 1rem;
 	line-height: 1.5;
 }
 
 .ui {
 	font-family: Montserrat;
-	font-weight: bold;
+	font-weight: normal;
 	font-size: 0.875rem;
 	letter-spacing: .025rem;
 	text-transform: uppercase;
@@ -104,7 +104,7 @@ h1, h2, h3, p {
 	grid-template:
 	[header-start] 	"header" 	4em		[header-end]
 	[main-start]		"main" 		1fr		[main-end]
-	[footer-start] 	"footer" 	3em		[footer-end]
+	[footer-start] 	"footer" 	auto		[footer-end]
 	/ 1fr;
 }
 

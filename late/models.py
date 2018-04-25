@@ -28,7 +28,7 @@ class Product(db.Model):
 	def colors_object(self):
 		return Color(self.colors)
 
-	def make_arry(self, str_arr, delimiter):
+	def make_array(self, str_arr, delimiter):
 		return str_arr.split(delimiter)
 
 	def __repr__(self):
