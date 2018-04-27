@@ -1,5 +1,6 @@
 from late import db
 from datetime import datetime
+from werkzeug.security import generate_password_hash, check_password_hash
 
 categories = ["dresses", "jackets", "tops", "jeans", "pants"]
 
@@ -9,6 +10,22 @@ class User(db.Model):
 	email = db.Column(db.String(128), index=True, unique=True)
 	password_hash = db.Column(db.String(128))
 	joined = db.Column(db.DateTime, index=True, default=datetime.utcnow)
+
+	def set_hash(self, password_hash):
+		self.password = generate_password_hash(password_hash)
+		return password
+
+	def check_hash(self, login_password):
+		return check_password_hash(self.password, login_password)
+	"""
+	Dæmi:
+	u = User(username="ornstrangesuxdix", password="password123")
+	u.set_hash(password)
+	u.check_hash(anotherpassword)
+	>False
+	u.check_hash(password)
+	>True
+	"""
 
 	def __repr__(self):
 		return f"<User: {self.username}>"
