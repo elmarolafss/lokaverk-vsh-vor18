@@ -19,7 +19,7 @@ class User(db.Model):
 		return check_password_hash(self.password, login_password)
 	"""
 	Dæmi:
-	u = User(username="ornstrangesuxdix", password="password123")
+	u = User(username="ornstrange", password="password123")
 	u.set_hash(password)
 	u.check_hash(anotherpassword)
 	>False
