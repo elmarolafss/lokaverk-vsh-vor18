@@ -63,7 +63,7 @@ h1, h2, h3, p {
 	font-family: BebasNeue;
 	font-weight: bolder;
 	font-size: 7rem;
-	letter-spacing: .05rem;
+	letter-spacing: .4rem;
 	line-height: 1.25;
 }
 
@@ -71,7 +71,7 @@ h1, h2, h3, p {
 	font-family: BebasNeue;
 	font-weight: normal;
 	font-size: 3rem;
-	letter-spacing: .05rem;
+	letter-spacing: .4rem;
 	line-height: 1.25;
 }
 
@@ -120,9 +120,20 @@ h1, h2, h3, p {
 	grid-area: footer;
 }
 
+.search-grid {
+    /* Grid Fallback */
+    display: flex;
+    flex-wrap: wrap;
+
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(18em, 1fr));
+    grid-auto-rows: minmax(20em, auto);
+    grid-gap: 1em;
+}
+
 /* HEADER */
 .header-nav {
-	max-width: 80em;
+	max-width: 90em;
 	padding: 0 1em 0 1em;
 }
 
@@ -150,6 +161,11 @@ h1, h2, h3, p {
 }
 .search-icon:hover {
 	fill: var(--red);
+}
+
+/* FOOTER */
+footer .footer-container {
+	max-width: 90em;
 }
 
 /* BUTTONS */

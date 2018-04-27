@@ -20,16 +20,16 @@ class Product(db.Model):
 	discount = db.Column(db.Float)
 	category = db.Column(db.String(255), index=True)
 	color = db.Column(db.String(255), index=True)
-	colors = db.Column(db.String(255), index=True)
-	images = db.Column(db.String(255), index=True)
-	info = db.Column(db.String(255), index=True)
+	colors = db.Column(db.String(255))
+	images = db.Column(db.Text)
+	info = db.Column(db.Text, index=True)
 	sizes = db.Column(db.String(255))
 
 	def colors_object(self):
 		return Color(self.colors)
 
-	def make_array(self, str_arr, delimiter):
-		return str_arr.split(delimiter)
+	def make_array(self, str_arr, separator="$"):
+		return str_arr.split(separator)
 
 	def __repr__(self):
 		return self.name
@@ -41,11 +41,11 @@ class Purchase(db.Model):
 	id = db.Column(db.Integer, primary_key=True)
 	prod_name = db.Column(db.String(255), db.ForeignKey('product.link_name'))
 	cart_id = db.Column(db.Integer, db.ForeignKey('cart.id'))
-	price = db.Column(db.Float, index=True)
-	discount = db.Column(db.Float, index=True)
-	color = db.Column(db.String(255), index=True)
-	size = db.Column(db.String(255), index=True)
-	date = db.Column(db.DateTime, index=True, default=datetime.utcnow)
+	price = db.Column(db.Float)
+	discount = db.Column(db.Float)
+	color = db.Column(db.String(255))
+	size = db.Column(db.String(255))
+	date = db.Column(db.DateTime, default=datetime.utcnow)
 
 	def __repr__(self):
 		return f"item: {this.prod_name} added to cart: {cart_id}"
@@ -53,11 +53,11 @@ class Purchase(db.Model):
 class Cart(db.Model):
 	id = db.Column(db.Integer, primary_key=True)
 	user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-	total_pre_tax = db.Column(db.Float, index=True)
-	discount = db.Column(db.Float, index=True)
-	tax = db.Column(db.Float, index=True)
-	total = db.Column(db.Float, index=True)
-	color = db.Column(db.String(255), index=True)
+	total_pre_tax = db.Column(db.Float)
+	discount = db.Column(db.Float)
+	tax = db.Column(db.Float)
+	total = db.Column(db.Float)
+	color = db.Column(db.String(255))
 
 	def __repr__(self):
 		return self.id
