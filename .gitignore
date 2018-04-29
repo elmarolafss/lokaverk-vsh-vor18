@@ -58,3 +58,6 @@ ENV/
 
 # .tmp files
 *.tmp
+
+# .node_modules
+.node_modules/
