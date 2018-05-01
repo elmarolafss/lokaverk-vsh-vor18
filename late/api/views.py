@@ -8,7 +8,7 @@ def index():
 
 @app.route("/db-init")
 def db_init():
-    initialize_database()
+    return initialize_database()
 
 @app.route("/products/get", methods=["GET"])
 def products_get():

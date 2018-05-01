@@ -1,9 +1,12 @@
 from late import db, app
 from datetime import datetime
+import os.path
 
 categories = ["dresses", "jackets", "tops", "jeans", "pants"]
 
 def initialize_database():
+    if os.path.exists("./app.db"):
+        return "Database already exists"
     app.logger.info("Database is not created, exec create_all() here.")
     db.create_all()
     admin_user = User("admin","admin","admin")
@@ -20,6 +23,7 @@ def initialize_database():
     db.session.add(admin_user)
     db.session.add(test_prod)
     db.session.commit()
+    return "Database created"
 
 class User(db.Model):
     __tablename__ = "users"
