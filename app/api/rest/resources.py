@@ -4,12 +4,19 @@ http://flask-restplus.readthedocs.io
 """
 
 from datetime import datetime
-from flask import request
+from flask import request, jsonify
 from flask_restplus import Api
 
 from app.api.rest.base import BaseResource, SecureResource
 from app.api import api_rest
 
+
+@api_rest.route("/products")
+class Products(BaseResource):
+    """ Add / Get all Products """
+
+    def get(self):
+        return jsonify({"1":1,"2":2,"3":3})
 
 @api_rest.route('/resource/<string:resource_id>')
 class ResourceOne(BaseResource):
@@ -17,11 +24,11 @@ class ResourceOne(BaseResource):
 
     def get(self, resource_id):
         timestamp = datetime.utcnow().isoformat()
-        return {'timestamp': timestamp}
+        return {"timestamp": timestamp}
 
     def post(self, resource_id):
         json_payload = request.json
-        return {'timestamp': json_payload}, 201
+        return {"timestamp": json_payload}, 201
 
 
 @api_rest.route('/secure-resource/<string:resource_id>')
@@ -30,3 +37,4 @@ class SecureResourceOne(SecureResource):
     def get(self, resource_id):
         timestamp = datetime.utcnow().isoformat()
         return {'timestamp': timestamp}
+

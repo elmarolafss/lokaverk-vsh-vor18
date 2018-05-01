@@ -7,7 +7,6 @@ from flask_restplus import Api
 api_bp = Blueprint('api_bp', __name__,
                    template_folder='templates',
                    url_prefix='/api')
-
 api_rest = Api(api_bp)
 
 @api_bp.after_request

@@ -1,4 +1,4 @@
-from late import db, app
+from app import db, app
 from datetime import datetime
 import os.path
 

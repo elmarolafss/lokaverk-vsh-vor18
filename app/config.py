@@ -1,7 +1,9 @@
 ### Global Flask Application Settings ###
 
 import os
-from late import app
+from . import app
+
+basedir = os.path.abspath(os.path.dirname(__file__))
 
 
 class Config(object):
@@ -9,6 +11,9 @@ class Config(object):
     TESTING = False
     BASE_DIR = os.path.dirname(__file__)
     CLIENT_DIR = os.path.join(BASE_DIR, "client", "vue_app")
+    SQLALCHEMY_DATABASE_URI = os.environ.get("DATABASE_URL") or "sqlite:///" + os.path.join(basedir, "app.db")
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
+
 
     if not os.path.exists(CLIENT_DIR):
         raise Exception(f"Client App directory not found: {CLIENT_DIR}")
