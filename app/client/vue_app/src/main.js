@@ -5,7 +5,12 @@ import store from './store'
 
 import './filters'
 
-Vue.config.productionTip = false
+// css
+require('./assets/css/tachyons.css')
+require('./assets/css/style.css')
+
+
+Vue.config.productionTip = true
 
 new Vue({
   router,

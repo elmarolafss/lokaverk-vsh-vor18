@@ -1,21 +1,6 @@
 <template>
-  <div class="home">
-    <HelloWorld msg="Welcome to Your Vue.js + Flask App"/>
-  </div>
+  <main class="main-grid-item" role="main">
+    <h1>late</h1>
+    <h1 class="red">index</h1>
+  </main>
 </template>
-
-<script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
-
-export default {
-  name: 'home',
-  components: {
-    HelloWorld
-  }
-}
-</script>
-
-<style lang="scss">
-
-</style>
