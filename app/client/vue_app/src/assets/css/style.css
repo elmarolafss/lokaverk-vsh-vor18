@@ -126,9 +126,9 @@ h1, h2, h3, p {
     flex-wrap: wrap;
 
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(20em, 1fr));
-    grid-auto-rows: 38.8em;
-    grid-gap: 2em;
+    grid-template-columns: repeat(auto-fill, minmax(16em, 1fr));
+    grid-auto-rows: 32em;
+    grid-gap: 1em;
 }
 
 /* HEADER */
@@ -211,6 +211,14 @@ footer .footer-container {
 .btn-child {
 	display: table-cell;
 	vertical-align: middle;
+}
+
+/* SEARCH */
+.prod-thumb-img {
+	width: auto;
+	height: auto;
+	max-width: 150%;
+	max-height: 32em;
 }
 
 /* MEDIA */

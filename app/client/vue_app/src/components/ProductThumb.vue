@@ -1,16 +1,19 @@
 <template>
-  <router-link to="#" class="product-thumb h-100">
-  	<div class="flex flex-column justify-between h-100">
-	  	<div class="hide-child" @mouseover="hover = true" @mouseleave="hover = false">
-	  		<div v-if="hover">
-	  			<img class="child" v-lazy="thumb2" :alt="prod.id">
-	  		</div>
-	  		<div v-else>
-		  		<img v-lazy="thumb1" :alt="prod.id">
-	  		</div>
-	  	</div>
-	    <p class="ui tc">{{ prod.title }}</p>
-		</div>
+  <router-link to="#" class="link black product-thumb h-100">
+    <div class="flex flex-column justify-between h-100">
+      <div class="overflow-hidden ba" @mouseover="hover = true" @mouseleave="hover = false">
+        <div v-if="hover">
+          <img class="prod-thumb-img" v-lazy="thumb2" alt="">
+        </div>
+        <div v-else>
+          <img class="prod-thumb-img" v-lazy="thumb1" alt="">
+        </div>
+      </div>
+      <div class="flex-column tc h3 bg-white bb br bl">
+        <p class="pv2 ui">{{ prod.title }}</p>
+        <p class="pv2 pr2 ui">{{ prod.price }}$</p>
+      </div>
+    </div>
   </router-link>
 </template>
 
@@ -21,11 +24,11 @@ export default {
     prod: Object
   },
   data () {
-  	return {
-  		hover: false,
-  		thumb1: this.prod.images[0],
-  		thumb2: this.prod.images[1]
-  	}
+    return {
+      hover: false,
+      thumb1: this.prod.images[0],
+      thumb2: this.prod.images[1]
+    }
   }
 }
 </script>

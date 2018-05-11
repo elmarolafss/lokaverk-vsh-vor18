@@ -103,3 +103,28 @@ if use_new_links == "y":
     except:
         print("something went wrong with writing to all_products.json...")
         raise
+
+fix_all_clothes = input("\nFix all_clothes.json? (y/n): ")
+if fix_all_clothes == "y":
+    all_clothes = {cat: [] for cat in category_ids}
+    try:
+        with open("all_products.json", "r") as f:
+            all_clothes = json.load(f)
+    except:
+        all_clothes = {cat: [] for cat in category_ids}
+        print("something went wrong with reading all_products.json...")
+
+    # for category in all_clothes:
+    for cat in all_clothes:
+        _temp_arr = [all_clothes[cat][pid] for pid in all_clothes[cat]]
+        all_clothes[cat] = _temp_arr
+
+    you_sure = input("\nYou want to write to all_clothes.json? (y/n): ")
+    if you_sure == "y":
+        try:
+            with open("all_products.json", "w+") as f:
+                json.dump(all_clothes, f, indent=4)
+                print("dumped info into all_products.json")
+        except:
+            print("something went wrong with writing to all_products.json...")
+            raise

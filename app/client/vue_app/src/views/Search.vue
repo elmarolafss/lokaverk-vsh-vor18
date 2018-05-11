@@ -1,10 +1,21 @@
 <template>
-  <div class="search-grid debug">
-    <div v-if="all" v-for="prod in prods">
-      <ProductThumb v-for="product in prod" :prod="product"></ProductThumb>
+  <div class="cf h-100">
+    <div class="db fl w5 h-100 br b--black">.</div>
+    <div class="fl w-80 search-grid pa3">
+      <div v-for="product in chunkedProds">
+        <ProductThumb class="tc" :prod="product"></ProductThumb>
+      </div>
     </div>
-    <div v-else>
-      <ProductThumb :prod="prod"></ProductThumb>
+    <div class="fl w-80 h3 pa3 dt">
+      <div class="dtc v-mid center tc">
+        <a class="link black pa2 bt bb b--black hover-bg-red hover-white" href="1">1</a>
+        <a class="link black pa2 bt bb b--black hover-bg-red hover-white" href="1">2</a>
+        <a class="link black pa2 bt bb b--black hover-bg-red hover-white" href="1">3</a>
+        <a class="link black pa2 bt bb b--black hover-bg-red hover-white" href="1">4</a>
+        <a class="link black pa2 bt bb b--black hover-bg-red hover-white" href="1">5</a>
+        <a class="link black pa2 bt bb b--black hover-bg-red hover-white" href="1">...</a>
+        <a class="link black pa2 bt bb b--black hover-bg-red hover-white" href="1">90</a>
+      </div>
     </div>
   </div>
 </template>
@@ -20,32 +31,45 @@ export default {
   },
   data () {
     return {
-      doo: '1233',
-      error: '',
       query: this.$route.query,
       prods: {},
-      all: true
+      cat: '',
+      pageNum: 1,
+      chunkSize: 48
     }
   },
   methods: {
     fetchProducts () {
-      this.query = this.$route.query
-      if (this.query.cat) { this.all = false }
-      $backend.fetchProducts(this.query.cat)
+      this.cat = this.query.cat
+      $backend.fetchProducts(this.cat)
         .then(responseData => {
           this.prods = responseData
         }).catch(error => {
           this.error = error.message
         })
+    },
+    chunkProds: function (pnum) {
+      let _temp_arr = [];
+      for (let i = 0, len=this.prods.length; i < len; i += this.chunkSize)
+        _temp_arr.push(this.prods.slice(i, i + this.chunkSize));
+      return _temp_arr[pnum-1];
     }
   },
   watch: {
     '$route' (to, from) {
       this.prods = {}
+      this.query = this.$route.query
       this.fetchProducts()
     }
   },
+  computed: {
+    chunkedProds: function () {
+      return this.chunkProds(this.pageNum)
+    }
+  },
   mounted () {
+    this.prods = {}
+    this.query = this.$route.query
     this.fetchProducts()
   }
 }

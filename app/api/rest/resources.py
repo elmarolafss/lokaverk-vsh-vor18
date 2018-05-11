@@ -30,7 +30,6 @@ def get_clothes_from_file(fname="all_products.json"):
 class Products(BaseResource):
 
     def get(self):
-        # get all products or prod categories with ?cat=x
         data = get_clothes_from_file()
         # print(request.args)
         if "cat" in request.args:
