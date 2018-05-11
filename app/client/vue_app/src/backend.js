@@ -5,7 +5,7 @@ const API_URL = IS_PRODUCTION ? '/api/' : 'http://localhost:5000/api/'
 
 let $axios = axios.create({
   baseURL: API_URL,
-  timeout: 5000,
+  timeout: 30000,
   headers: {'Content-Type': 'application/json'}
 })
 
@@ -26,13 +26,10 @@ $axios.interceptors.response.use(function (response) {
 
 export default {
 
-  fetchResource () {
-    return $axios.get(`resource/xxx`)
-      .then(response => response.data)
-  },
-
-  fetchSecureResource () {
-    return $axios.get(`secure-resource/zzz`)
+  fetchProducts (cat) {
+    let url = 'products'
+    if (cat != '') { url += '?cat=' + cat}
+    return $axios.get(url)
       .then(response => response.data)
   }
 }

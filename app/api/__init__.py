@@ -1,5 +1,4 @@
 ### API Blueprint Application ###
-
 import os
 from flask import Flask, Blueprint, session, current_app
 from flask_restplus import Api

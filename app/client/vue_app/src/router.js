@@ -23,5 +23,6 @@ export default new Router({
       name: 'api',
       component: Api
     }
-  ]
+  ],
+  mode: 'history'
 })

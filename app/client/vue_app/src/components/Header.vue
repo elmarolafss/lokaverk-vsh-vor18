@@ -6,7 +6,7 @@
       </router-link>
       <div class="flex justify-end">
         <div class="dn flex-l justify-between pv2">
-          <router-link :to="{ path: 'search', query: { cat: cat }}" v-for="cat in categories" class="link btn-white mr3">
+          <router-link :to="{ path: '/search', query: { cat: cat } }" v-for="cat in categories" class="link btn-white mr3">
             <div class="btn-child ui">{{ cat }}</div>
           </router-link>
         </div>

@@ -77,10 +77,13 @@ if picker == "1":
                 page_address = f"https://www.fashionnova.com/collections/{category}?page={page_num}"
                 print(f"now visiting : {page_address}")
                 page = requests.get(page_address)
-                soup = BeautifulSoup(page.content, "lxml")
-                item_divs = soup.find_all("div", class_="product-item")
-                for item_div in item_divs:
-                    item_name = item_div.find_all("a")[0]["href"].split("/")[-1]
+                soup = BeautifulSoup(page.content, "html.parser")
+                print(soup)
+                item_lis = soup.find_all("li", class_="isp_product_info")
+                print(item_lis)
+                for item_li in item_lis:
+                    item_name = item_li.find_all("a")[0]["href"].split("/")[-1]
+                    print(item_name)
                     all_links[category].append(item_name)
                     print(f"just added: {item_name} to all_links {category} list")
             print(f"WOW! i just added {len(all_links[category])} item names to the list!")

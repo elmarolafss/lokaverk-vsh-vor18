@@ -1,20 +1,31 @@
 <template>
-  <div class="product-thumb">
-    <h1>{{ prod.name }}</h1>
-    <img :src="prod.link" :alt="prod.name">
-  </div>
+  <router-link to="#" class="product-thumb h-100">
+  	<div class="flex flex-column justify-between h-100">
+	  	<div class="hide-child" @mouseover="hover = true" @mouseleave="hover = false">
+	  		<div v-if="hover">
+	  			<img class="child" v-lazy="thumb2" :alt="prod.id">
+	  		</div>
+	  		<div v-else>
+		  		<img v-lazy="thumb1" :alt="prod.id">
+	  		</div>
+	  	</div>
+	    <p class="ui tc">{{ prod.title }}</p>
+		</div>
+  </router-link>
 </template>
 
 <script>
 export default {
   name: 'product-thumb',
+  props: {
+    prod: Object
+  },
   data () {
-    return {
-      prod: {
-        name: "prod name",
-        link: "https://cdn.shopify.com/s/files/1/0293/9277/products/Fashion_Nova_12-07-17-777.jpg?v=1513114501"
-      }
-    }
+  	return {
+  		hover: false,
+  		thumb1: this.prod.images[0],
+  		thumb2: this.prod.images[1]
+  	}
   }
 }
 </script>
