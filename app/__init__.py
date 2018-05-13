@@ -11,7 +11,7 @@ app.register_blueprint(client_bp)
 
 from .config import Config, flask_config
 app.config.from_object(Config)
-app.logger.info(f">>> {flask_config}")
+app.logger.info(">>> {}".format(flask_config))
 
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate

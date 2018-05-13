@@ -5,7 +5,6 @@ from . import app
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 
-
 class Config(object):
     DEBUG = False
     TESTING = False
@@ -16,7 +15,7 @@ class Config(object):
 
 
     if not os.path.exists(CLIENT_DIR):
-        raise Exception(f"Client App directory not found: {CLIENT_DIR}")
+        raise Exception("Client App directory not found: {}".format(CLIENT_DIR))
 
 
 class Development(Config):
@@ -33,4 +32,4 @@ class Production(Config):
 
 # Set `FLASK_CONFIG` env to "Production" or "Development" to set Config
 flask_config = os.environ.get("FLASK_CONFIG", "Development")
-app.config.from_object(f"app.config.{flask_config}")
+app.config.from_object("app.config.{}".format(flask_config))
