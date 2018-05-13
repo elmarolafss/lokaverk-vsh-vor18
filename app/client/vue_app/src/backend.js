@@ -28,7 +28,7 @@ export default {
 
   fetchProducts (cat) {
     let url = 'products'
-    if (cat != '') { url += '?cat=' + cat }
+    if (cat !== '') { url += '?cat=' + cat }
     else { url += '?cat=dresses' }
     return $axios.get(url)
       .then(response => response.data)

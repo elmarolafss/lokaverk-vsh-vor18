@@ -11,7 +11,7 @@
       </div>
       <div class="flex-column tc h3 bg-white bb br bl">
         <p class="pv2 ui">{{ prod.title }}</p>
-        <p class="pv2 pr2 ui">{{ prod.price }}$</p>
+        <p class="pb2 ui">{{ prod.price }}$</p>
       </div>
     </div>
   </router-link>

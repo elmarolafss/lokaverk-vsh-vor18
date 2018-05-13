@@ -39,7 +39,7 @@ def fix_upper_hex(_d):
 def exit_write():
     try:
         with open("colors.json", "w+") as f:
-            json.dump(c_to_hex, f)
+            json.dump(c_to_hex, f, indent=4)
         print("dumped info into colors.json")
     except:
         print("something went wrong with colors.json...")
@@ -60,7 +60,7 @@ except:
     print("something went wrong with clothes_links.json...")
     raise
 
-sel = input("get colors / find unnamed = 1/2: ")
+sel = input("get colors / find unnamed / fix colors.json / use new all_products.json = 1/2/3/4: ")
 
 if sel == "1":
     for category in all_links:
@@ -111,3 +111,20 @@ elif sel == "2":
                         c_to_hex[color] = new_val
     except:
         exit_write()
+elif sel == "3":
+    exit_write()
+elif sel == "4":
+    try:
+        with open("all_products.json", "r") as f:
+            all_prods = json.load(f)
+    except:
+        print("something went wrong with reading all_products.json...")
+        raise
+
+    for cat in all_prods:
+        for prod in all_prods[cat]:
+            if not prod['color'] in c_to_hex:
+                print("unknown color", prod['color'], "what do i do?")
+                ask_me = input(f"\nWhat hex color is {prod['color']}: ")
+                c_to_hex[prod['color']] = ask_me
+    exit_write()

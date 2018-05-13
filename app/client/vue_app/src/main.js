@@ -10,11 +10,10 @@ import './filters'
 require('./assets/css/tachyons.css')
 require('./assets/css/style.css')
 
-
 Vue.config.productionTip = true
 
 Vue.use(VueLazyload, {
-  preLoad: 2,
+  preLoad: 1,
   error: 'dist/error.png',
   loading: './assets/loading.gif',
   attempt: 1,

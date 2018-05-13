@@ -127,7 +127,8 @@ h1, h2, h3, p {
 
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(16em, 1fr));
-    grid-auto-rows: 32em;
+    /*grid-auto-rows: 32em;*/
+    grid-auto-rows: minmax(30em, 32em);
     grid-gap: 1em;
 }
 
