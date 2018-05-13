@@ -1,29 +1,44 @@
 <template>
-  <div class="cf h-100">
-    <div class="db fl w5 h-100 br b--black">
+  <main class="main-grid-item">
+  <div class="cf h-100 search-main-grid">
+    <div class="search-filter db h-100 br b--black">
       <div class="fixed w5 tc mt6">
-        sort by price hér
-        <div class="mv3 w-100 bb"></div>
-        colors koma hér
+        <router-link
+        :to="{ path: $route.fullPath, query: { sort: 'hilo' } }"
+        class="dib link ui black pb2 bb">
+          Highest - Lowest
+        </router-link>
+        <router-link
+        :to="{ path: $route.fullPath, query: { sort: 'lohi' } }"
+        class="dib link ui black pt2">
+          Lowest - Highest
+        </router-link>
       </div>
     </div>
-    <div class="fl w-80 search-grid pt3 ph3">
-      <div v-for="product in chunkedProds[pageNum-1]">
+    <div class="subheadline pa4 search-grid" v-if="loading">
+      Loading...
+    </div>
+    <div class="pt3 ph3 search-grid" v-else>
+      <div class="subheadline" v-if="empty">
+        sorry, i got nothing...
+      </div>
+      <div v-for="product in chunkedProds" v-else>
         <ProductThumb class="tc" :prod="product"></ProductThumb>
       </div>
     </div>
-    <div class="fl w-80 h3 pa3 dt">
+    <div v-if="error" class="subheadline pa4">{{ errorMessage }}</div>
+    <div class="search-pages h-100 pa3 dt">
       <div class="dtc v-mid center tc">
         <router-link
         v-for="i in howManyChunks"
-        :to="{ path: '/search', query: { cat: cat, page: i } }"
+        :to="{ path: $route.fullPath, query: { page: i } }"
         class="link black pa2 bt bb b--black hover-bg-red hover-white">
           {{ i }}
         </router-link>
-        <!-- <a class="link black pa2 bt bb b--black hover-bg-red hover-white" href="1">1</a> -->
       </div>
     </div>
   </div>
+  </main>
 </template>
 
 <script>
@@ -37,61 +52,58 @@ export default {
   },
   data () {
     return {
-      query: this.$route.query,
-      prods: {},
-      cat: '',
-      pageNum: 1,
-      chunkSize: 48
+      prods: [],
+      cToHex: {},
+      loading: false,
+      error: false,
+      errorMessage: "",
+      colFilter: false,
+      saveColors: []
     }
   },
   methods: {
     fetchProducts () {
-      this.cat = this.query.cat
-      $backend.fetchProducts(this.cat)
+      this.loading = true
+      $backend.fetchProducts(this.$route.query)
         .then(responseData => {
           this.prods = responseData
+          this.loading = false
         }).catch(error => {
-          this.error = error.message
+          this.error = true
+          this.errorMessage = error.message
         })
     },
-    chunkProds: function () {
-      let _temp_arr = [];
-      for (let i = 0, len=this.prods.length; i < len; i += this.chunkSize)
-        _temp_arr.push(this.prods.slice(i, i + this.chunkSize));
-      return _temp_arr;
-    },
-    updateAll: function () {
+    updateAll () {
       this.prods = {}
+      this.error = false
+      this.errorMessage = ""
       this.query = this.$route.query
       this.fetchProducts()
+    },
+    pageIndex () {
       if (this.query.page) {
-        this.pageNum = this.query.page
+        return this.query.page - 1
       } else {
-        this.pageNum = 1
+        return 0
       }
-      this.chunkedProds = this.chunkProds()
     }
   },
   watch: {
-    '$route' (to, from) {
-      this.updateAll()
-      console.log("route changed?")
-    }
+    '$route': 'updateAll'
   },
   computed: {
-    chunkedProds: function () {
-      return this.chunkProds()
+    chunkedProds () {
+      return this.prods[this.pageIndex()]
     },
-    howManyChunks: function () {
-      return this.chunkedProds.length
+    howManyChunks () {
+      return this.prods.length
+    },
+    empty () {
+      if (this.prods.length === 0) {return true}
+      return false
     }
   },
-  mounted () {
-    console.log("2. mounted")
-    this.updateAll()
-  },
   created () {
-    console.log("1. created")
     this.updateAll()
   }
 }

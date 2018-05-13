@@ -1,5 +1,5 @@
 <template>
-  <router-link to="#" class="link black product-thumb h-100">
+  <router-link :to="{ path: '/product/' + prod.id }" class="link black product-thumb h-100">
     <div class="flex flex-column justify-between h-100">
       <div class="overflow-hidden ba" @mouseover="hover = true" @mouseleave="hover = false">
         <div v-if="hover">
@@ -26,6 +26,7 @@ export default {
   data () {
     return {
       hover: false,
+      pid: this.prod.id,
       thumb1: this.prod.images[0],
       thumb2: this.prod.images[1]
     }

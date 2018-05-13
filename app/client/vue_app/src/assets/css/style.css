@@ -98,6 +98,15 @@ h1, h2, h3, p {
 	line-height: 1;
 }
 
+.ui-big {
+	font-family: Montserrat;
+	font-weight: normal;
+	font-size: 1.4rem;
+	letter-spacing: .05rem;
+	text-transform: uppercase;
+	line-height: 1.2;
+}
+
 /* GRID */
 .body-grid {
 	display: grid;
@@ -121,14 +130,10 @@ h1, h2, h3, p {
 }
 
 .search-grid {
-    /* Grid Fallback */
-    display: flex;
-    flex-wrap: wrap;
-
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(16em, 1fr));
+		display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(18em, 1fr));
     /*grid-auto-rows: 32em;*/
-    grid-auto-rows: minmax(30em, 32em);
+    grid-auto-rows: minmax(18em, 32em);
     grid-gap: 1em;
 }
 
@@ -177,6 +182,7 @@ footer .footer-container {
 	height: 2em;
 	width: 10em;
 	text-align: center;
+	border: none !important;
 }
 .btn-black:hover {
 	background: var(--white);
@@ -189,6 +195,7 @@ footer .footer-container {
 	height: 2em;
 	width: 10em;
 	text-align: center;
+	border: none !important;
 }
 .btn-white:hover {
 	background: var(--red);
@@ -201,13 +208,14 @@ footer .footer-container {
 	height: 2em;
 	width: 10em;
 	text-align: center;
+	border: none !important;
 }
 .btn-red:hover {
 	background: var(--black);
 	color: var(--white);
 }
 .btn-wide {
-	width: 16em;
+	width: 100%;
 }
 .btn-child {
 	display: table-cell;
@@ -215,11 +223,58 @@ footer .footer-container {
 }
 
 /* SEARCH */
+.search-main-grid {
+	display: grid;
+	grid-template-columns: 16em 1fr;
+	grid-template-rows: calc(100% - 6em) 6em;
+}
+
+.search-filter {
+	grid-area: 1 / 1 / 3 / 2;
+}
+
+.search-grid {
+	grid-area: 1 / 2 / 2 / 3;
+}
+
+.search-pages {
+	grid-area: 2 / 2 / 3 / 3;
+}
+
 .prod-thumb-img {
 	width: auto;
 	height: auto;
-	max-width: 150%;
-	max-height: 32em;
+	max-width: 300%;
+	max-height: 34em;
+}
+
+.single-prod-img-grid {
+	display: grid;
+	width: 100%;
+	grid-template-columns: repeat(2, 1fr);
+	grid-template-rows: auto;
+ 	align-items: center;
+  grid-gap: 1em;
+}
+
+.single-prod-main-one {
+	grid-area: mainone;
+}
+.single-prod-main-two {
+	grid-area: maintwo;
+}
+.single-prod-side-one {
+	grid-area: sideone;
+}
+.single-prod-side-two {
+	grid-area: sidetwo;
+}
+
+/* SINGLE PRODUCT */
+.single-product-grid {
+	display: grid;
+	grid-template-columns: 4fr 3fr;
+	grid-template-rows: 1fr;
 }
 
 /* MEDIA */

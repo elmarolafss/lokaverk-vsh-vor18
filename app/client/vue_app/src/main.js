@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import VueLazyload from 'vue-lazyload'
+import Lightbox from 'vue-easy-lightbox'
 import App from './App.vue'
 import router from './router'
 import store from './store'
@@ -19,6 +20,8 @@ Vue.use(VueLazyload, {
   attempt: 1,
   lazyComponent: true
 })
+
+Vue.use(Lightbox)
 
 new Vue({
   router,

@@ -1,11 +1,11 @@
 import axios from 'axios'
 
 const IS_PRODUCTION = process.env.NODE_ENV === 'production'
-const API_URL = IS_PRODUCTION ? '/api/' : 'http://localhost:5000/api/'
+const API_URL = IS_PRODUCTION ? '/api/' : 'http://eaglemac.local:5000/api/'
 
 let $axios = axios.create({
   baseURL: API_URL,
-  timeout: 30000,
+  timeout: 10000,
   headers: {'Content-Type': 'application/json'}
 })
 
@@ -26,10 +26,24 @@ $axios.interceptors.response.use(function (response) {
 
 export default {
 
-  fetchProducts (cat) {
+  fetchProducts (query) {
     let url = 'products'
-    if (cat !== '') { url += '?cat=' + cat }
-    else { url += '?cat=dresses' }
+    let first = true
+    for (let qp in query) {
+      if (query[qp] !== undefined && qp !== 'page') {
+        if (first) {
+          url += '?' + qp + '=' + query[qp] + '&'
+          first = false
+        }
+        else { url += qp + '=' + query[qp] + '&' }
+      }
+    }
+    if (url.slice(-1) === "&") {url = url.slice(0, -1)}
+    return $axios.get(url)
+      .then(response => response.data)
+  },
+  fetchProduct (pid) {
+    let url = 'products/' + pid
     return $axios.get(url)
       .then(response => response.data)
   }
